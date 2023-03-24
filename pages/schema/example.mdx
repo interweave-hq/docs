@@ -1,0 +1,299 @@
+# Example Schema
+
+Every Interweave configuration revolves around the schema. It's pretty much a way to describe the different fields in your object. You can specify validations that need to pass, HTTP requests, and options about regarding rendering in the interface.
+
+The full TypeScript interface can be [found here on GitHub](https://github.com/interweave-hq/interweave/).
+
+## Approach
+
+Each project is going to include many schema configurations. Full complete coverage, you should create at least one per table in your database. In practice, you only have to configure a schema if you need to generate a quick CRUD (Create, Read, Update, Delete) form for it.
+
+## Schema Object
+
+Let's say we're going to be creating schema configurations a blog API we just made. A blog contains many different fields; authors, posts, categories, comments, etc. For this example, **let's start with the author**.
+
+The root schema object has two properties you can configure, `keys` and `requests`:
+
+```js
+const authorConfig = {
+  keys: {},
+  requests: {}
+};
+```
+
+### Keys
+
+The `keys` property will contain the outline of our data. You can use any string for the properties of `keys`.
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      }
+    }
+  },
+  requests: {}
+};
+```
+
+You can see we define a field `firstName` for our author object. We also specify this field will be a string, and is a required field. If we want to make it an optional field, we can specify it as such like this:
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      }
+    },
+    age: {
+      schema: {
+        type: "number",
+        is_optional: true
+      }
+    }
+  },
+  requests: {}
+};
+```
+
+We also get to specify some requirements for this field using the `validation` property. Let's make sure the first name is at least 3 characters long, and our age is a valid number:
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        min_length: 3
+      }
+    },
+    age: {
+      schema: {
+        type: "number",
+        is_optional: true
+      },
+      validation: {
+        min: 0,
+        max: 110
+      }
+    }
+  },
+  requests: {}
+};
+```
+
+We also get access to special validation properties like `is_email`. This will ensure our field is always in a proper email format:
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        min_length: 3
+      }
+    },
+    age: {
+      schema: {
+        type: "number",
+        is_optional: true
+      },
+      validation: {
+        min: 0,
+        max: 110
+      }
+    },
+    email: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_email: true
+      }
+    }
+  },
+  requests: {}
+};
+```
+
+Enums are a great way to ensure your field only contains a certain value:
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        min_length: 3
+      }
+    },
+    age: {
+      schema: {
+        type: "number",
+        is_optional: true
+      },
+      validation: {
+        min: 0,
+        max: 110
+      }
+    },
+    email: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_email: true
+      }
+    },
+    topics: {
+      schema: {
+        type: "string",
+        enum: ["News", "Business", "Other"],
+        default_value: "Business"
+      }
+    }
+  },
+  requests: {}
+};
+```
+
+Also, let's not forget the ID field. We probably want the server to create this field, so to disable what gets rendered in our form, we have access to a full `interface` property.
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        min_length: 3
+      }
+    },
+    age: {
+      schema: {
+        type: "number",
+        is_optional: true
+      },
+      validation: {
+        min: 0,
+        max: 110
+      }
+    },
+    email: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_email: true
+      }
+    },
+    topics: {
+      schema: {
+        type: "string",
+        enum: ["News", "Business", "Other"],
+        default_value: "Business"
+      }
+    },
+    id: {
+      schema: {
+        type: "string"
+      },
+      interface: {
+        form: {
+          hidden: true
+        }
+      }
+    }
+  },
+  requests: {}
+};
+```
+
+I think that's a perfect configuration to get started. If we push this to our studio, nothing will render because we didn't specify any requests. At the bare minimum, a single `create` or `get` property is required. Specifying a `get` property will render a table with the returned results from that endpoint. Only specifying a `create` property will only render the form. Feel free to save any combination of these properties.
+
+```js
+const authorConfig = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        min_length: 3
+      }
+    },
+    age: {
+      schema: {
+        type: "number",
+        is_optional: true
+      },
+      validation: {
+        min: 0,
+        max: 110
+      }
+    },
+    email: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_email: true
+      }
+    },
+    topics: {
+      schema: {
+        type: "string",
+        enum: ["News", "Business", "Other"],
+        default_value: "Business"
+      }
+    },
+    id: {
+      schema: {
+        type: "string"
+      },
+      interface: {
+        form: {
+          hidden: true
+        }
+      }
+    }
+  },
+  requests: {
+    get: {
+      uri: "http://example.com/authors",
+      method: "GET",
+      data_path: "data"
+    },
+    create: {
+      uri: "http://example.com/authors",
+      method: "POST",
+      data_path: "data.authors"
+    }
+  }
+};
+```
+
+Now our configuration is ready to save to Interweave so that we can see the rendered interface. Let's pass that configuration object to our build function and give it a unique key:
+
+```js
+import { buildInterface } from "@interweave/interweave";
+import { authorConfig } from "../interweave/configurations";
+
+buildInterface("authors", authorConfig);
+```

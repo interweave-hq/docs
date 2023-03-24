@@ -1,0 +1,56 @@
+# Introduction
+
+Welcome to Interweave!
+
+If you hate writing CRUD forms so that you can manage data in your API, you're in the right place. Interweave is a platform for creating integrated frontends extremely fast-- tightly coupled to your database schema, version controlled, and automatically hosted. What does that mean? Imagine being able to create an entire interface from just a JSON object. As simple as:
+
+```js
+// Define what your data looks like
+const interweaveObject = {
+  keys: {
+    title: {
+      schema: {
+        type: string
+      }
+    }
+  },
+  requests: {
+    create: {
+      uri: "https://dumbjson.com/titles"
+    }
+  }
+};
+
+// Sync with remote interface
+buildInterface("titles", interweaveObject);
+```
+
+The example above uses Interweave Schema Syntax to define a configuration shape of our data. The configuration is then passed into `buildInterface`, along with a key that uniquely identifies our interface. After running this, you'll have a hosted form with validation in our (Studio)[https://my.interweave.studio]. This is the bare minimum you'd need to get started.
+
+## Features
+
+- 🚀 No custom code, no logic, all static
+- 🔥 Blazing fast performance
+- 🔒 Full TypeScript support
+- 🤝 Lives where you define your database schema
+- ♻️ Forms always in sync with your API
+- 👁️ Easily generate from OpenAPI and any existing systems
+- 🔄 Version controlled
+- 🌏 Compatible with any language
+- 🏗️ Configurable with your build process
+
+## How does it work?
+
+Interweave is made up of three parts:
+
+- NPM package
+- API that controls syncing
+- Interweave Studio that generates the frontend
+
+Since an Interweave configuration is entirely static, Interweave supports _any_ language that can write JSON and make requests.
+
+## Plugins
+
+## Documentation
+
+The documentation is available at [https://nextra.site](https://nextra.site).

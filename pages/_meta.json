@@ -1,0 +1,12 @@
+{
+  "index": "Welcome",
+  "installation": "Installation",
+  "roadmap": "Roadmap",
+  "---": {
+    "type": "separator"
+  },
+  "schema": "Configuration",
+  "typescript": "TypeScript",
+  "requests": "Requests",
+  "other-languages": "Other Languages"
+}

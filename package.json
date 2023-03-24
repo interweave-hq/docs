@@ -1,0 +1,24 @@
+{
+	"name": "docs",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"next": "^13.2.4",
+		"nextra": "^2.2.19",
+		"nextra-theme-docs": "^2.2.19",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^18.15.3",
+		"typescript": "^5.0.2"
+	}
+}
