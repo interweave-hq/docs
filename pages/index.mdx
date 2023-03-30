@@ -2,55 +2,60 @@
 
 Welcome to Interweave!
 
-If you hate writing CRUD forms so that you can manage data in your API, you're in the right place. Interweave is a platform for creating integrated frontends extremely fast-- tightly coupled to your database schema, version controlled, and automatically hosted. What does that mean? Imagine being able to create an entire interface from just a JSON object. As simple as:
+If you hate writing CRUD forms so that you can manage data in your API, you're in the right place. Interweave is a platform for creating integrated frontends extremely fast-- tightly coupled to your database schema, version controlled, and automatically hosted. What does that mean? Imagine being able to create a hosted interface from just a JSON object. As simple as:
 
-```js
-// Define what your data looks like
-const interweaveObject = {
-  keys: {
-    title: {
-      schema: {
-        type: string
+```json
+{
+  "keys": {
+   "title": {
+      "schema": {
+        "type": "string"
       }
     }
   },
-  requests: {
-    create: {
-      uri: "https://dumbjson.com/titles"
+  "requests": {
+    "create": {
+      "uri": "https://dumbjson.com/titles"
     }
   }
 };
-
-// Sync with remote interface
-buildInterface("titles", interweaveObject);
 ```
 
-The example above uses Interweave Schema Syntax to define a configuration shape of our data. The configuration is then passed into `buildInterface`, along with a key that uniquely identifies our interface. After running this, you'll have a hosted form with validation in our (Studio)[https://my.interweave.studio]. This is the bare minimum you'd need to get started.
+These interfaces come with built-in support for authentication and permissions management, high performance, beautifully styled components, accessible and speedy user experience, client-side _and_ server-side validation, error handling, and more.
+
+Your team no longer has to manage no-code interfaces that fall out of sync with your database and API. Your team no longer has to configure anything outside of the code. Once the code is pushed and your API is updated, your Interweave app is updated.
+
+Everything is built-in so you don't have to rewrite the same thing over and over. Get going fast. Stay moving fast.
 
 ## Features
 
-- 🚀 No custom code, no logic, all static
-- 🔥 Blazing fast performance
+- 👀 [Open-source](https://github.com/interweave-hq/interweave)
 - 🔒 Full TypeScript support
-- 🤝 Lives where you define your database schema
-- ♻️ Forms always in sync with your API
-- 👁️ Easily generate from OpenAPI and any existing systems
+- ♻️ Forms _just work_, always in sync with your API
+- 🔥 Blazing fast performance
 - 🔄 Version controlled
+- 🤝 Lives where you define your database schema
+- 🚀 No custom code, no logic, all static
+- 👁️ Easily generate from OpenAPI and any existing systems
 - 🌏 Compatible with any language
 - 🏗️ Configurable with your build process
 
 ## How does it work?
 
-Interweave is made up of three parts:
-
-- NPM package
-- API that controls syncing
-- Interweave Studio that generates the frontend
-
 Since an Interweave configuration is entirely static, Interweave supports _any_ language that can write JSON and make requests.
 
-## Plugins
+This method of describing your interface in a static way is our implementation of an Abstract Interaction Object (AIO). This structure is static in the sense that the output cannot contain custom logic or functions. However, that does not mean that this description of your interface has to be constructed in a static way. The underlying data format is JSON, so any language can compose the objects however they see fit, as long as JSON is sent to Interweave.
 
-## Documentation
+We're making a bet that these static objects of component definitions and data-fetching patterns will enable quick development of business-critical interfaces.
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+Our first implementation surrounds managing CRUD (Create, Read, Update, Delete) interactions with APIs, but we see this method having potential in creating user dashboards, custom apps, and more. With a developer-focused API, Interweave can become a platform for generating custom interfaces generated at runtime or build-time.
+
+You can see more details on the [Getting Started page](/getting-started), but getting going is three steps:
+
+1. Create a project in Interweave
+2. Define your structure
+3. Send to Interweave
+
+## Contribute
+
+Interweave was created by [Mike Carbone](https://twitter.com/MikeCarbone) in March 2023. The project is young, and actively welcoming conributors.

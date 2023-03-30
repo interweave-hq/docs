@@ -1,12 +1,10 @@
 {
   "index": "Welcome",
-  "installation": "Installation",
+  "getting-started": "Getting Started",
   "roadmap": "Roadmap",
   "---": {
     "type": "separator"
   },
   "schema": "Configuration",
-  "typescript": "TypeScript",
-  "requests": "Requests",
-  "other-languages": "Other Languages"
+  "typescript": "TypeScript"
 }

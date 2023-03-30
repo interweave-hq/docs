@@ -1,0 +1,80 @@
+# Getting Started
+
+## JavaScript / TypeScript Installation
+
+```bash
+npm install @interweave/interweave
+```
+
+```ts filename="interweave.js"
+import { type Schema, buildInterface } from "@interweave/interweave";
+
+// Define the content of your interface
+const configuration: Schema = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      }
+    }
+  },
+  requests: {
+    create: {
+      uri: "https://example.com/names",
+      method: "POST"
+    }
+  }
+};
+
+// Send to Interweave
+buildInterface("unique-key", configuration, projectId);
+```
+
+## No Install
+
+Another way to use Interweave is without any installation. This will work in any language that can define JSON and send POST requests.
+
+**1. Create a project in the [Interweave dashboard](https://studio.interwv.com)**
+
+Take note of the project ID.
+
+**2. Define Your Configuration Anywhere**
+
+```json filename="interweave.json"
+{
+  "keys": {
+    "firstName": {
+      "schema": {
+        "type": "string"
+      }
+    }
+  },
+  "requests": {
+    "create": {
+      "uri": "https://example.com/names",
+      "method": "POST"
+    }
+  }
+}
+```
+
+**3. Send to Interweave**
+
+```js
+const requestBody = {
+  schema_config: configurationJson, // The configuration you defined above
+  key: "names" // Unique identifier of this interface
+  title: "Favorite Names" // User-friendly name for this interface
+};
+
+fetch("https://api.interwv.com/api/v1/", {
+  method: "POST",
+  body: JSON.stringify(requestBody),
+  headers: {
+    "Content-Type": "application/json",
+    "authorization": "{{ INTERWEAVE_API_KEY }}"
+  }
+});
+```
+
+The response will contain a URL to your hosted, functional interface in Interweave!
