@@ -7,5 +7,5 @@
   },
   "schema": "Configuration",
   "typescript": "TypeScript",
-  "example": "Tutorial"
+  "tutorial": "Tutorial"
 }
