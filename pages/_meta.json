@@ -6,5 +6,6 @@
     "type": "separator"
   },
   "schema": "Configuration",
-  "typescript": "TypeScript"
+  "typescript": "TypeScript",
+  "example": "Tutorial"
 }
