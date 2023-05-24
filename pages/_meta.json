@@ -1,11 +1,18 @@
 {
   "index": "Welcome",
+  "pricing": "Pricing",
   "getting-started": "Getting Started",
-  "roadmap": "Roadmap",
   "---": {
     "type": "separator"
   },
-  "schema": "Configuration",
+  "schema": "Specification",
   "typescript": "TypeScript",
-  "tutorial": "Tutorial"
+  "tutorial": "Tutorial",
+  "----": {
+    "type": "separator"
+  },
+  "about": "About",
+  "accessibility": "Accessibility",
+  "privacy": "Privacy Policy",
+  "terms": "Terms of Service"
 }

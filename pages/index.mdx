@@ -1,8 +1,24 @@
 # Introduction
 
-Welcome to Interweave!
+Interweave is a tool to generate permissioned, authenticated, and hosted user-interfaces for your API.
 
-If you hate writing CRUD forms so that you can manage data in your API, you're in the right place. Interweave is a platform for creating integrated frontends extremely fast-- tightly coupled to your database schema, version controlled, and automatically hosted. What does that mean? Imagine being able to create a hosted interface from just a JSON object. As simple as:
+Here is why Interweave is different from other tools, and why you might like it:
+
+- The configuration **lives with your code**, so when your data model updates hit version control, your Interweave interface will stay up to date.
+- **Permissions and fine-grain access controls** work out of the box and are easily configurable.
+- Everything you do is **composable and reusable**.
+- **Speed is our first priority**— engineering time is precious and should be treated as such.
+- Drag-and-drops are slow and clunky; you don't ever have to use one to configure anything.
+
+## Integrated Frontend
+
+Interweave is a platform to create **integrated frontends**— your configuration lives with your code, but is hosted somewhere else for you. Once written, the object can be committed to version control. Whenever your data shape changes, you can update your configuration object. Your team can even set up a continuous integration to always keep your interfaces up-to-date. A configuration looks something like this:
+{/* If you hate writing CRUD forms so that you can manage data in your API, you're in the right place. Interweave is a platform for creating integrated frontends extremely fast-- tightly coupled to your database schema, version controlled, and automatically hosted. What does that mean? Imagine being able to create a hosted interface from just a JSON object. As simple as: */}
+{/* Low-code solution to rapidly create schema-synced user-interfaces for your API */}
+{/* Rapidly create user-interfaces for your API */}
+{/* Turn your API into a CMS. */}
+
+{/* Let's create a graphic to explain the idea very simply */}
 
 ```json
 {
@@ -14,23 +30,30 @@ If you hate writing CRUD forms so that you can manage data in your API, you're i
     }
   },
   "requests": {
-    "create": {
+    "get": {
       "uri": "https://dumbjson.com/titles"
-    }
+    },
+    "create": {
+      "uri": "https://dumbjson.com/titles",
+      "method": "POST"
+    },
   }
 };
 ```
 
-These interfaces come with built-in support for authentication and permissions management, high performance, beautifully styled components, accessible and speedy user experience, client-side _and_ server-side validation, error handling, and more.
+This object would produce an interface with a form for creating new titles, as well as a table to view titles already created.
 
-Your team no longer has to manage no-code interfaces that fall out of sync with your database and API. Your team no longer has to configure anything outside of the code. Once the code is pushed and your API is updated, your Interweave app is updated.
+The creation forms _require_ no additional configuration: interfaces come with built-in support for authentication and permissions management, accessible and speedy user experience, mobile responsiveness, client-side _and_ server-side validation, error handling, and more. If more customization is desired, Interweave offers many options in the configuration to adjust the experience.
 
-Everything is built-in so you don't have to rewrite the same thing over and over. Get going fast. Stay moving fast.
+Now, engineering time does not have to be dedicated to maintaining no-code interfaces or writing these basic interfaces from scratch. The interfaces are tightly coupled to the rest of your engineering efforts and workflow; pull requests and open-source contributions to name a few.
 
-## Features
+Get going fast. Stay moving fast.
+
+## More Features
 
 - 👀 [Open-source](https://github.com/interweave-hq/interweave)
 - 🔒 Full TypeScript support
+- 🧑‍🤝‍🧑 Permissions and access Control
 - ♻️ Forms _just work_, always in sync with your API
 - 🔥 Blazing fast performance
 - 🔄 Version controlled
@@ -44,11 +67,15 @@ Everything is built-in so you don't have to rewrite the same thing over and over
 
 Since an Interweave configuration is entirely static, Interweave supports _any_ language that can write JSON and make requests.
 
-This method of describing your interface in a static way is our implementation of an Abstract Interaction Object (AIO). This structure is static in the sense that the output cannot contain custom logic or functions. However, that does not mean that this description of your interface has to be constructed in a static way. The underlying data format is JSON, so any language can compose the objects however they see fit, as long as JSON is sent to Interweave.
+This method of describing your interface in a static way is our implementation of an Abstract Interaction Object (AIO). This structure is static in the sense that the output cannot contain custom logic or functions. However, that does not mean that it has to be constructed in a static way. The underlying data format is JSON, so any language can compose the objects however they see fit, as long as JSON is sent to Interweave.
 
-We're making a bet that these static objects of component definitions and data-fetching patterns will enable quick development of business-critical interfaces.
+Once the configuration is sent to Interweave, your configuration will be validated and built. This only takes a few moments. Once done, the interface will be ready for use.
 
-Our first implementation surrounds managing CRUD (Create, Read, Update, Delete) interactions with APIs, but we see this method having potential in creating user dashboards, custom apps, and more. With a developer-focused API, Interweave can become a platform for generating custom interfaces generated at runtime or build-time.
+{/* We're making a bet that these static objects of component definitions and data-fetching patterns will enable quick development of business-critical interfaces. */}
+
+{/* Our first implementation surrounds managing CRUD (Create, Read, Update, Delete) interactions with APIs, but we see this method having potential in creating user dashboards, custom apps, and more. With a developer-focused API, Interweave can become a platform for generating custom interfaces generated at runtime or build-time. */}
+
+The static nature of Interweave allows for the rapid development of business-critical interfaces through pre-defined component definitions and data-fetching patterns. This modular, yet static approach enables organizations to assemble fully functional interfaces for their teams quickly and efficiently without writing any custom logic.
 
 You can see more details on the [Getting Started page](/getting-started), but getting going is three steps:
 

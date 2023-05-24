@@ -5,10 +5,6 @@ export default {
   project: {
     link: "https://github.com/interweave-hq/interweave"
   },
-  banner: {
-    key: "beta-docs",
-    text: <p>🚧 These docs are in Alpha and are not stable 🚧</p>
-  },
   docsRepositoryBase: "https://github.com/interweave-hq/interweave/blob/docs",
   useNextSeoProps() {
     return {
