@@ -1,0 +1,24 @@
+# `billing_strategy`
+
+Control how usage of this interface is billed.
+
+```js {6}
+const config = {
+  keys: ...,
+  requests: ...,
+  access: ...,
+  authentication: ...,
+  billing_strategy: "Individual"
+};
+```
+
+| Type   | Required |      Default |
+| :----- | :------: | -----------: |
+| string |    No    | `Individual` |
+
+There are two available options for the `billing_strategy` property:
+
+- `Individual` (Default) - Each user is responsible for their usage costs. Interface creators will not be responsible for any costs accrued by other users.
+- `InterfaceOwner`- The creator of the interface will be responsible for all costs associated with usage of this interface. Useful for organizations with employees.
+
+See the [pricing page](/pricing) for more information about billing.

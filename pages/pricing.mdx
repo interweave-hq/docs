@@ -1,25 +1,20 @@
 # Pricing
 
-We're constantly evolving our pricing and plans to best suit our customers. Please reach out if you have any questions or concerns.
+At Interweave, we believe it's fair that you only pay for what you use.
 
-## Free Plan
+With that in mind, we charge a rate of **2 cents per request made**. This means that you only pay for the exact number of requests you make, with no hidden fees or complex calculations. Invoices are sent on the first of every month. Verified accounts will receive $5, or 250 requests, per month for free.
 
-- Unlimited public projects and interfaces
-- 1 private project with 3 interfaces
-- $0 / month
+You can track your usage and upcoming bill inside the app, ensuring that you have full control over your usage and budget.
 
-## Pro Plan
+## Claiming Costs
 
-- Unlimited public projects and interfaces
-- Unlimited private projects and interfaces
-- 10 total team members across interfaces
-- $8 / month or $90 / year
+We understand that some interface owners may want to be responsible for the costs associated with the usage of their interface. For example, an organization that uses Interweave probably doesn't want their employees to be responsible for the usage costs. To configure this, you can specify `InterfaceOwner` as your billing strategy in your configuration.
 
-## Gold Plan
-
-- Unlimited projects and interfaces
-- Unlimited team members across interfaces
-- White-labeled interfaces
-- Usage logs
-- Priority support
-- Reach out to sales@carbonology.in
+```js
+// Configuration object
+{
+  keys: ...,
+  access: ...,
+  billing_strategy: "InterfaceOwner";
+}
+```

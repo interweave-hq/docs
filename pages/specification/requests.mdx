@@ -1,0 +1,70 @@
+# Requests
+
+Requests detail how Interweave should communicate with an API. See the [Request](/types/request) for implementation details.
+
+```js {4,6,12,17,22}
+const config = {
+  keys: {},
+  access: {},
+  requests: {
+    // Will render a table of data if present
+    get: {
+      uri: "https://example.com/genres",
+      http_method: "GET",
+      data_path: "results.genres"
+    },
+    // Will render a form to create new entries
+    create: {
+      uri: "https://example.com/genres",
+      http_method: "POST"
+    },
+    // Will render an update button
+    update: {
+      uri: "https://example.com/genres/<<row.id>>",
+      http_method: "PATCH"
+    },
+    // Will render a delete button
+    update: {
+      uri: "https://example.com/genres/<<row.id>>",
+      http_method: "DELETE"
+    }
+  }
+};
+```
+
+- [`get`](#get)
+- [`create`](#create)
+- [`update`](#update)
+- [`delete`](#delete)
+
+## `get`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| Request |    No    | `undefined` |
+
+If present, will populate a table of records with the data returned from this. If omitted, the table will not render.
+
+## `create`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| Request |    No    | `undefined` |
+
+If present, will generate a form of fields created based on the schema.
+
+## `update`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| Request |    No    | `undefined` |
+
+If present, will enable selectable fields on the table and generate a form of fields created based on the schema that will enable updates.
+
+## `delete`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| Request |    No    | `undefined` |
+
+If present, table fields will become selectable and a delete button will appear.

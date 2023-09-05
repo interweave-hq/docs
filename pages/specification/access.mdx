@@ -1,0 +1,104 @@
+# `access`
+
+Control who has access to this interface.
+
+```js {4-13}
+const config = {
+  keys: ...,
+  requests: ...,
+  access: {
+    privacy: "Private",
+    default_permissions: ["Read"],
+    users: [
+        { email: "userAccountEmail1@example.com" }
+        { email: "userAccountEmail2@example.com", permissions: ["Read", "Create", "Update"] }
+        { email: "userAccountEmail3@example.com", permissions: ["Delete"] }
+        { email: "userAccountEmail4@example.com", permissions: ["All"] }
+    ]
+  },
+};
+```
+
+- [`privacy`](#privacy)
+- [`default_permission`](#default-permissions)
+- [`users`](#users)
+- [Examples](#examples)
+
+## `privacy`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| String |    No    | `undefined` |
+
+- Specifies the privacy settings for this interface. It determines who can access it. Possible values are:
+
+  - `Private`: **(DEFAULT)** Only the creator of the interface has access.
+  - `Unlisted`: Anyone with the link can access it.
+  - `Public`: It is accessible to anyone.
+  - `DomainRestricted`: It is accessible to anyone with the same organizational domain as you, plus anyone specified in the users array.
+  - `InviteRestricted`: It is accessible only to users specified in the users array.
+
+## `default_permissions`
+
+| Type              | Required |     Default |
+| :---------------- | :------: | ----------: |
+| PermissionValue[] |    No    | `undefined` |
+
+- Specifies the default permissions granted to those who have access to the interface.
+- Available permission values:
+  - `Create`
+  - `Read`
+  - `Update`
+  - `Delete`
+  - `All`
+
+## `users`
+
+| Type  | Required |     Default |
+| :---- | :------: | ----------: |
+| Users |    No    | `undefined` |
+
+- Specifies the users who should have access to the interface.
+- A `user` is an object with two fields:
+
+  - `email`: The email you want to share access to. Once the user signs into Interweave with this email, they'll be able to access the interface
+
+  - `permissions`: array of permission values. This user will be able to perform any of the specified operations. If left blank, `default_permissions` will be used.
+
+## Examples
+
+```js
+// Give everyone in my company's domain access to the interface
+{
+  ...schema,
+  "access": {
+    "privacy": "DomainRestricted",
+    "default_permissions": ["Read", "Create"],
+  }
+}
+```
+
+```js
+// Only who I invite will have access to the interface
+{
+  ...schema,
+  "access": {
+    "privacy": "InviteRestricted",
+    "users": [
+      { "email": "friend1@example.com", "permissions": ["Create"] }
+      { "email": "friend2@example.com", "permissions": ["Read"] }
+      { "email": "friend3@example.com", "permissions": ["All"] }
+    ],
+  }
+}
+```
+
+```js
+// Only I can access the interface
+{
+  ...schema,
+  "access": {
+    "privacy": "Private"
+  }
+}
+```

@@ -1,34 +1,69 @@
+import { Tabs, Tab } from "nextra-theme-docs";
+
 # Getting Started
 
-## JavaScript / TypeScript Installation
+## Installation
 
 ```bash
 npm install @interweave/interweave
 ```
 
-```ts filename="interweave.js"
-import { type Schema, buildInterface } from "@interweave/interweave";
+<Tabs items={["Example", "TypeScript"]}>
+    <Tab>
+        ```ts filename="interweave.js"
+        import { buildInterface } from "@interweave/interweave";
 
-// Define the content of your interface
-const configuration: Schema = {
-  keys: {
-    firstName: {
-      schema: {
-        type: "string"
-      }
-    }
-  },
-  requests: {
-    create: {
-      uri: "https://example.com/names",
-      method: "POST"
-    }
-  }
-};
+        // Define the content of your interface
+        const configuration = {
+          keys: {
+            firstName: {
+              schema: {
+                type: "string"
+              }
+            }
+          },
+          requests: {
+            create: {
+              uri: "https://example.com/names",
+              method: "POST"
+            }
+          }
+        };
 
-// Send to Interweave
-buildInterface("unique-key", configuration, projectId);
-```
+        // Send to Interweave
+        buildInterface("unique-key", configuration, projectId);
+
+````
+    </Tab>
+    <Tab>
+        ```ts filename="interweave.ts"
+        import { type Schema, buildInterface } from "@interweave/interweave";
+
+        // Define the content of your interface
+        const configuration: Schema = {
+          keys: {
+            firstName: {
+              schema: {
+                type: "string"
+              }
+            }
+          },
+          requests: {
+            create: {
+              uri: "https://example.com/names",
+              method: "POST"
+            }
+          }
+        };
+
+        // Send to Interweave
+        buildInterface("unique-key", configuration, projectId);
+
+````
+
+    </Tab>
+
+</Tabs>
 
 ## No Install
 
@@ -59,6 +94,8 @@ Take note of the project ID.
 ```
 
 **3. Send to Interweave**
+
+See the [do-it-yourself page for more information](/build-do-it-yourself).
 
 ```js
 const requestBody = {

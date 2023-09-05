@@ -1,0 +1,337 @@
+# Validation
+
+Requirements for the value of this field. These validations apply when using Interweave's `validate`function. By default, this object is undefined.
+
+- [`min`](#min)
+- [`max`](#max)
+- [`equals`](#equals)
+- [`is_not`](#is-not)
+- [`length`](#length)
+- [`min_length`](#min-length)
+- [`max_length`](#max-length)
+- [`is_email`](#is-email)
+- [`is_phone`](#is-phone)
+- [Dependent fields](#dependepnt-fields)
+
+## `min`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| number |    No    | `undefined` |
+
+Only applies to `type: number`. The minimum value.
+
+```js
+const config = {
+  keys: {
+    age: {
+      schema: {
+        type: "number"
+      },
+      validation: {
+        min: 0
+      }
+    }
+  }
+};
+```
+
+## `max`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| number |    No    | `undefined` |
+
+Only applies to `type: number`. The maximum value.
+
+```js
+const config = {
+  keys: {
+    age: {
+      schema: {
+        type: "number"
+      },
+      validation: {
+        max: 120
+      }
+    }
+  }
+};
+```
+
+## `equals`
+
+| Type | Required |     Default |
+| :--- | :------: | ----------: |
+| any  |    No    | `undefined` |
+
+The submitted value must be equal to this value.
+
+```js
+const config = {
+  keys: {
+    age: {
+      schema: {
+        type: "number"
+      },
+      validation: {
+        equals: 18
+      }
+    }
+  }
+};
+```
+
+## `is_not`
+
+| Type | Required |     Default |
+| :--- | :------: | ----------: |
+| any  |    No    | `undefined` |
+
+```js
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_not: "Mike"
+      }
+    }
+  }
+};
+```
+
+## `length`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| number |    No    | `undefined` |
+
+Only applies when the field is a `string` or `is_array` is true. Ensures the length of the string or array is equal to this value.
+
+```js
+const config = {
+  keys: {
+    entries: {
+      schema: {
+        type: "number",
+        is_array: true
+      },
+      validation: {
+        length: 7
+      }
+    }
+  }
+};
+```
+
+## `min_length`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| number |    No    | `undefined` |
+
+Only applies when the field is a `string` or `is_array` is true. Ensures the length of the string or array is equal to this value.
+
+```js
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        min_length: 2
+      }
+    }
+  }
+};
+```
+
+## `max_length`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| number |    No    | `undefined` |
+
+Only applies when the field is a `string` or `is_array` is true. Ensures the length of the string or array is equal to this value.
+
+```js
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        max_length: 25
+      }
+    }
+  }
+};
+```
+
+## `is_email`
+
+| Type              | Required |     Default |
+| :---------------- | :------: | ----------: |
+| boolean or object |    No    | `undefined` |
+
+Whether this field should only accept valid emails or not. Accepts a `boolean` or object outlining the details.
+
+```js
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_email: true
+      }
+    }
+  }
+};
+```
+
+or alternatively for more fine-grained control:
+
+```js
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_email: {
+          forbidden_domains: ["gmail", "yahoo", "hotmail"], // optional
+          forbidden_tlds: ["com", "io", "net", "af"] // optional
+        }
+      }
+    }
+  }
+};
+```
+
+## `is_phone`
+
+| Type              | Required |     Default |
+| :---------------- | :------: | ----------: |
+| boolean or object |    No    | `undefined` |
+
+Whether this field should only accept valid phone numbers or not. Accepts a `boolean`.
+
+```js
+const config = {
+  keys: {
+    phone: {
+      schema: {
+        type: "string"
+      },
+      validation: {
+        is_phone: true
+      }
+    }
+  }
+};
+```
+
+## Dependent fields
+
+Specify a field that must fulfill a condition if the other is present. Each accepts an array of targets that parse the created object. Ususally this is just the key name.
+
+```js
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      }
+    },
+    lastName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        ensure_present_if_any_present: ["firstName"] // if firstName has a value, this field is required
+      }
+    }
+  }
+};
+```
+
+If you use interface.form.out_key to set a different output path, then make sure to specify that new path in the dependency array.
+
+```js {10, 20}
+const config = {
+  keys: {
+    firstName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      interface: {
+        form: {
+          out_key: "user_first_name"
+        }
+      }
+    },
+    lastName: {
+      schema: {
+        type: "string",
+        is_optional: true
+      },
+      validation: {
+        ensure_present_if_any_present: ["user_first_name"]
+      }
+    }
+  }
+};
+```
+
+Here are other available options:
+
+### `ensure_present_if_all_present`
+
+- This field is required if _all_ fields are present.
+
+### `ensure_present_if_any_present`
+
+- This field is required if _any_ of these fields are present.
+
+### `ensure_present_if_any_empty`
+
+- This field is required if _any_ of these fields are empty.
+
+##### `ensure_present_if_all_empty`
+
+- This field is required if _all_ of these fields are empty.
+
+### `ensure_present_if_none_empty`
+
+- This field is required if _none_ of these fields are empty.
+
+### `ensure_empty_if_any_present`
+
+- This field must be empty if _any_ of these fields are present.
+
+### `ensure_empty_if_all_present`
+
+- This field must be empty if _all_ of these fields are present.
+
+### `ensure_empty_if_all_empty`
+
+- This field must be empty if _all_ of these fields are empty.
+
+### `ensure_empty_if_any_empty`
+
+- This field must be empty if _any_ of these fields are empty.
+
+### `ensure_empty_if_none_empty`
+
+- This field must be empty if _none_ of these fields are empty.

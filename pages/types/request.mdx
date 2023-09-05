@@ -1,0 +1,123 @@
+# Request
+
+Requests are how you can interact with 3rd party APIs in your Interweave schema.
+
+```js {4-11}
+const config = {
+  requests: {
+    get: {
+      uri: "https://example.com/genres",
+      http_method: "GET",
+      data_path: "data.response",
+      error_path: "data.error.message",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      authentication_key: "api-access"
+    }
+  }
+};
+```
+
+- [`uri`](#uri)
+- [`http_method`](#http-method)
+- [`headers`](#headers)
+- [`body`](#body)
+- [`data_path`](#data-path)
+- [`error_path`](#error-path)
+- [`default_error`](#default-error)
+- [`parameters`](#parameters)
+- [`authentication_key`](#authentication-key)
+- [`skip_body_attachment`](#skip-body-attachment)
+- [`value_path`](#value-path)
+- [`label_path`](#label-path)
+
+## `uri`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |   Yes    | `undefined` |
+
+## `http_method`
+
+`"GET" | "POST" | "DELETE" | "PATCH" | "PUT"`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |   Yes    | `undefined` |
+
+## `headers`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| object |    No    | `undefined` |
+
+## `body`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| object |    No    | `undefined` |
+
+## `data_path`
+
+Where we want to pull data from in the response from the object. This uses [`lodash.get method`](https://lodash.com/docs/4.17.15#get).
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+## `error_path`
+
+If the request status returns >399, we use this field as the error message. This uses [`lodash.get method`](https://lodash.com/docs/4.17.15#get).
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+## `default_error`
+
+If the request fails and error_path is empty, use this as the message.
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+## `parameters`
+
+Keys _not_ specified in the URL will be appended as query parameters. For example, a key of `location` will be appended as ?location=value
+
+| Type                        | Required |     Default |
+| :-------------------------- | :------: | ----------: |
+| [Keys](/specification/keys) |    No    | `undefined` |
+
+## `authentication_key`
+
+If a Request requires authentication, specify a key from the interface authentication object. If the key is not found in this interfaces' authentication object, it'll look for another the key within another interface within this same project.
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+## `skip_body_attachment`
+
+This will prevent the form data from sending with POST, PATCH, and PUT requests.
+
+| Type    | Required | Default |
+| :------ | :------: | ------: |
+| boolean |    No    | `false` |
+
+## `value_path`
+
+If this is to dynamically fill an enum at run-time, this will be the option's value populated in the Select or MultiSelect component. This find operation will occur on every entry within the returned array.
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+## `label_path`
+
+If this is to dynamically fill an enum at run-time, this will be the option's label populated in the Select or MultiSelect component. This find operation will occur on every entry within the returned array.
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |

@@ -1,17 +1,20 @@
 {
   "index": "Welcome",
-  "pricing": "Pricing",
   "getting-started": "Getting Started",
-  "---": {
-    "type": "separator"
-  },
-  "schema": "Specification",
-  "typescript": "TypeScript",
+  "pricing": "Pricing",
   "tutorial": "Tutorial",
-  "----": {
-    "type": "separator"
+  "-- Specification": {
+    "type": "separator",
+    "title": "Specification"
   },
-  "about": "About",
+  "specification": "Specification",
+  "build": "Build",
+  "types": "Types",
+  "-- More": {
+    "type": "separator",
+    "title": "More"
+  },
+  "roadmap": "Roadmap",
   "accessibility": "Accessibility",
   "privacy": "Privacy Policy",
   "terms": "Terms of Service"

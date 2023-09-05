@@ -1,0 +1,194 @@
+# Interface
+
+Describe how elements in the interface should render.
+
+- [`label`](#label)
+- [`form`](#form)
+- [`table`](#table)
+
+```js
+const config = {
+    ...,
+    keys: {
+        exampleKey: {
+            schema: {
+                type: "string"
+            },
+            interface: {
+                label: "Example",
+                form: {
+                    description: "Small text that'll render near the input",
+                    placeholder: "Input placeholder text...",
+                    hidden: false,
+                    disabled: false,
+                    options:
+                }
+            }
+        }
+    }
+}
+```
+
+## `label`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+User-friendly name for the key. Will render on the form and the table's column.
+
+## `form`
+
+Describe how elements should render inside the Create and Update forms.
+
+- [`out_key`](#out-key)
+- [`description`](#description)
+- [`placeholder`](#placeholder)
+- [`hidden`](#hidden)
+- [`disabled`](#disabled)
+- [`options`](#options)
+
+### `out_key`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+When Interweave creates your object from the inputs, it assumes a flat structure, and that the key of your field will equal the key in your request body. So for example...
+
+This configuration:
+
+```js filename="Input"
+const config = {
+    keys: {
+        companyName: {
+            schema: {
+                type: "string"
+                default_value: "Interweave"
+            }
+        }
+    }
+}
+```
+
+Will create this object after the form is submitted:
+
+```json filename="Output"
+{
+  "companyName": "Interweave"
+}
+```
+
+You can use the out_key to change what the key gets output as. For example...
+
+This configuration:
+
+```js filename="Input"
+const config = {
+    keys: {
+        companyName: {
+            schema: {
+                type: "string"
+                default_value: "Interweave"
+            },
+            interface: {
+                form: {
+                    out_key: "company"
+                }
+            }
+        }
+    }
+}
+```
+
+Will create this object after the form is submitted:
+
+```json filename="Output"
+{
+  "company": "Interweave"
+}
+```
+
+You can also use **dot notation to deep-set** inside the objects:
+
+```js filename="Input"
+const config = {
+    keys: {
+        companyName: {
+            schema: {
+                type: "string"
+                default_value: "Interweave"
+            },
+            interface: {
+                form: {
+                    out_key: "company.name"
+                }
+            }
+        }
+    }
+}
+```
+
+```json filename="Output"
+{
+  "company": {
+    "name": "Interweave"
+  }
+}
+```
+
+### `description`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+Helper text to render near the input element
+
+### `placeholder`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |    No    | `undefined` |
+
+Placeholder text to render on the element
+
+### `hidden`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| boolean |    No    | `undefined` |
+
+Whether to hide this element from the interface. Hiding the element in the form will skip its validation client-side. Useful for fields that get set server-side like `id`.
+
+### `disabled`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| boolean |    No    | `undefined` |
+
+Whether a user can interact with this element or not.
+
+---
+
+## `table`
+
+### `hidden`
+
+| Type    | Required |     Default |
+| :------ | :------: | ----------: |
+| boolean |    No    | `undefined` |
+
+Whether this column gets rendered on the table.
+
+### `column_width`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| number |    No    | `undefined` |
+
+Width of the column to override the defaults.
+
+## `plugins`
+
+A reserved key for other applications that may want to consume your Interweave object.

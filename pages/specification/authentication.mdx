@@ -1,0 +1,81 @@
+# `authentication`
+
+When communicating with a third-party API, you'll most likely need to attach an API token to access the resource. Using this field, you'll be able to require a token input before the interface gets loaded.
+
+Authentication tokens need to be identified by a string of your choice. **Authentication tokens are project-scoped**, so multiple interfaces can require the same token (and only be entered & saved once).
+
+To use the API token, specify the same key in the `authentication_key` field of a [Request](/types/request). The specified headers will be appended to the request.
+
+```js {5-21,27}
+const config = {
+  keys: ...,
+  access: ...,
+  authentication: {
+    // This is a project-scoped key, the name is your choice
+    // Any interfaces within the same project can refer to the same key
+    "my-api-access-key-name": {
+        type: "token",
+        // These headers will be appended to any request that refers to this key
+        headers: {
+            authentication: "Bearer {token}"
+        },
+        // Customize the modal that is displayed when prompting the user to enter the authentication token
+        interface: {
+            title: "Enter API Token",
+            label: "API Token",
+            placeholder: "abc123",
+            description: "This can be some small info for the user",
+            instructions_link: "https://example.com/api-access-instructions"
+        }
+    }
+  },
+  requests: {
+    get: {
+        uri: "https://example.com",
+        http_method: "GET",
+        // This key should match the key above
+        authentication_key: "my-api-access-key-name"
+    }
+  }
+};
+```
+
+- [`type`](#type)
+- [`headers`](#headers)
+- [`interface`](#interface)
+
+## `type`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |   Yes    | `undefined` |
+
+Determines the type of authentication being used.
+
+- `token`: An API token that is a single string value.
+
+_More options on the roadmap._
+
+## `headers`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| Object |    No    | `undefined` |
+
+Headers object to append to the request. In this object, you can refer to the value of your API token as `{token}`.
+
+## `interface`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| object |    No    | `undefined` |
+
+Options to customize the modal that prompts users to input their API token.
+
+### Interface Keys
+
+- `title` - Modal title
+- `label` - Input label
+- `placeholder` - Input placeholder
+- `description` - Modal description
+- `instructions_link` - Link for additional instructions

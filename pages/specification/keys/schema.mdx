@@ -1,0 +1,176 @@
+import { Tabs, Tab } from "nextra-theme-docs";
+
+# Schema
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| Schema |   Yes    | `undefined` |
+
+Schema will be an object that describes the details of our field.
+
+- [`type`](#type)
+- [`is_optional`](#is-optional)
+- [`is_array`](#is-array)
+- [`object_schema`](#object-schema)
+- [`enum`](#enum)
+- [`dynamic_enum`](#dynamic-enum)
+- [`default_value`](#default-value)
+
+<Tabs items={["Example", "TypeScript"]}>
+    <Tab>
+        ```js {4}
+        const config = {
+            keys: {
+                firstName: {
+                    schema: {
+                        type: "string",
+                        is_optional: true,
+                        is_array: false,
+                        object_schema: null,
+                        enum: null,
+                        default_value: null
+                    },
+                },
+            },
+        };
+        ```
+    </Tab>
+    <Tab>
+        ```ts {4}
+        const config = {
+            keys: {
+                firstName: {
+                    schema: {
+                        type: "string" | "number" | "boolean" | "object";
+                        is_optional?: boolean;
+                        is_array?: boolean;
+                        object_schema?: Schema;
+                        enum?: string[] | number[];
+                        default_value?: any;
+                    },
+                },
+            },
+        };
+        ```
+    </Tab>
+
+</Tabs>
+
+#### `type`
+
+| Type   | Required |     Default |
+| :----- | :------: | ----------: |
+| string |   Yes    | `undefined` |
+
+The type of this field. Can be one of these values: `string`, `number`, `boolean`, or `object`.
+
+#### `is_optional`
+
+| Type    | Required | Default |
+| :------ | :------: | :-----: |
+| boolean |    No    | `false` |
+
+Whether this is a required field or not.
+
+#### `is_array`
+
+| Type    | Required | Default |
+| :------ | :------: | :-----: |
+| boolean |    No    | `false` |
+
+Whether this field is going to be an array of the defined type. For example, if `is_array = true` and `type = string`, this field would denote contain an array of strings.
+
+#### `object_schema`
+
+| Type   |      Required      |   Default   |
+| :----- | :----------------: | :---------: |
+| object | if `type="object"` | `undefined` |
+
+If `type = object`, this field will be required to denote the shape of the object. The value expects another `Schema` shape.
+
+```js {5-20}
+const config = {
+  keys: {
+    author: {
+      schema: {
+        type: "object",
+        object_schema: {
+          // Nested schema object
+          keys: {
+            firstName: {
+              schema: {
+                type: "string"
+              }
+            },
+            lastName: {
+              schema: {
+                type: "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+```
+
+#### `enum`
+
+| Type                 | Required |     Default |
+| :------------------- | :------: | ----------: |
+| string[] or number[] |    No    | `undefined` |
+
+If you want to limit the values to a certain selection, specify an enum.
+
+```js {6}
+const config = {
+  keys: {
+    genres: {
+      schema: {
+        type: "string",
+        enum: ["Action", "Comedy", "Thriller", "Drama"]
+      }
+    }
+  }
+};
+```
+
+#### `dynamic_enum`
+
+| Type                               | Required |     Default |
+| :--------------------------------- | :------: | ----------: |
+| [Request](/specification/requests) |    No    | `undefined` |
+
+Dynamic enum allows you to use the data from a request to populate the values within a dropdown element. The data returned from the request should be an array of data. If your data is within a response object. you can use the `data_path` property to target where your array of data lives within the response object.
+
+```js {6-14}
+const config = {
+  keys: {
+    genres: {
+      schema: {
+        type: "string",
+        dynamic_enum: {
+          uri: "https://example.com/genres",
+          http_method: "GET",
+          data_path: "data.response",
+          error_path: "data.error.message",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    }
+  }
+};
+```
+
+#### `default_value`
+
+| Type | Required |     Default |
+| :--- | :------: | ----------: |
+| any  |    No    | `undefined` |
+
+Default value for this field. If no value is provided, this value will be used. This value should adhere to the other rules specified in the field's `schema`.
+
+---

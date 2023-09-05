@@ -1,0 +1,23 @@
+# `buildInterface`
+
+```js {17}
+import { buildInterface } from '@interweave/interweave';
+
+const config = {
+    title: "New Interface",
+    slug: "new-interface",
+    keys: ...,
+    authentication: ...,
+    access: ...,
+};
+
+const INTERWEAVE_OPTIONS = {
+    id: INTERWEAVE_PROJECT_ID,
+    token: INTERWEAVE_PROJECT_API_TOKEN
+};
+
+// This will send your config to Interweave and build your interface
+buildInterface(config, INTERWEAVE_OPTIONS);
+```
+
+The Interweave npm package includes a function that will build your interface.
