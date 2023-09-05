@@ -1,14 +1,23 @@
-import { Tabs, Tab } from "nextra-theme-docs";
+import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
 
 # Getting Started
 
+<Callout type="info">
+  This page uses JavaScript and npm. JavaScript is not necessary to use
+  Interweave. See the [build page](/build-do-it-yourself) for more information.
+</Callout>
+
 ## Installation
 
+<Steps>
+### Step 1: Install
 ```bash
 npm install @interweave/interweave
 ```
 
-<Tabs items={["Example", "TypeScript"]}>
+### Step 2: Build Config
+
+<Tabs items={["JavaScript", "TypeScript"]}>
     <Tab>
         ```ts filename="interweave.js"
         import { buildInterface } from "@interweave/interweave";
@@ -65,53 +74,8 @@ npm install @interweave/interweave
 
 </Tabs>
 
-## No Install
+### Step 3: That's it! View your interface in the app:
 
-Another way to use Interweave is without any installation. This will work in any language that can define JSON and send POST requests.
+![Interweave interface screenshot](/screenshot.png)
 
-**1. Create a project in the [Interweave dashboard](https://interwv.com)**
-
-Take note of the project ID.
-
-**2. Define Your Configuration Anywhere**
-
-```json filename="interweave.json"
-{
-  "keys": {
-    "firstName": {
-      "schema": {
-        "type": "string"
-      }
-    }
-  },
-  "requests": {
-    "create": {
-      "uri": "https://example.com/names",
-      "method": "POST"
-    }
-  }
-}
-```
-
-**3. Send to Interweave**
-
-See the [do-it-yourself page for more information](/build-do-it-yourself).
-
-```js
-const requestBody = {
-  schema_config: configurationJson, // The configuration you defined above
-  key: "names" // Unique identifier of this interface
-  title: "Favorite Names" // User-friendly name for this interface
-};
-
-fetch("https://api.interwv.com/api/v1/", {
-  method: "POST",
-  body: JSON.stringify(requestBody),
-  headers: {
-    "Content-Type": "application/json",
-    "authorization": "{{ INTERWEAVE_API_KEY }}"
-  }
-});
-```
-
-The response will contain a URL to your hosted, functional interface in Interweave!
+</Steps>
