@@ -9,7 +9,7 @@ Describe how elements in the interface should render.
 ```js
 const config = {
     ...,
-    keys: {
+    fields: {
         exampleKey: {
             schema: {
                 type: "string"
@@ -60,7 +60,8 @@ This configuration:
 
 ```js filename="Input"
 const config = {
-    keys: {
+    key: ...,
+    fields: {
         companyName: {
             schema: {
                 type: "string"
@@ -85,7 +86,8 @@ This configuration:
 
 ```js filename="Input"
 const config = {
-    keys: {
+    key: ...,
+    fields: {
         companyName: {
             schema: {
                 type: "string"
@@ -113,7 +115,8 @@ You can also use **dot notation to deep-set** inside the objects:
 
 ```js filename="Input"
 const config = {
-    keys: {
+    key: ...,
+    fields: {
         companyName: {
             schema: {
                 type: "string"

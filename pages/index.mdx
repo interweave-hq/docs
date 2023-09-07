@@ -10,7 +10,7 @@ Here is why Interweave is different from other tools, and why you might like it:
 - **Speed is our first priority**— engineering time is precious and should be treated as such.
 - Drag-and-drops are slow and clunky; you don't ever have to use one to configure anything.
 
-## Integrated Frontend
+## A Frontend That Lives With Your Backend
 
 Interweave is a platform to create **integrated frontends**— your configuration lives with your code, but is hosted somewhere else for you. Once written, the object can be committed to version control. Whenever your data shape changes, you can update your configuration object. Your team can even set up a continuous integration to always keep your interfaces up-to-date. A configuration looks something like this:
 {/* If you hate writing CRUD forms so that you can manage data in your API, you're in the right place. Interweave is a platform for creating integrated frontends extremely fast-- tightly coupled to your database schema, version controlled, and automatically hosted. What does that mean? Imagine being able to create a hosted interface from just a JSON object. As simple as: */}
@@ -22,7 +22,8 @@ Interweave is a platform to create **integrated frontends**— your configuratio
 
 ```json
 {
-  "keys": {
+  "key": "titles",
+  "fields": {
    "title": {
       "schema": {
         "type": "string"
@@ -53,7 +54,7 @@ Get going fast. Stay moving fast.
 
 - 👀 [Open-source](https://github.com/interweave-hq/interweave)
 - 🔒 Full TypeScript support
-- 🧑‍🤝‍🧑 Permissions and access Control
+- 🧑‍🤝‍🧑 Permissions and access control
 - ♻️ Forms _just work_, always in sync with your API
 - 🔥 Blazing fast performance
 - 🔄 Version controlled

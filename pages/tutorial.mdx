@@ -1,33 +1,37 @@
-# Example Schema
+import { Callout } from "nextra-theme-docs";
 
-Every Interweave configuration revolves around the schema. It's pretty much a way to describe the different fields in your object. You can specify validations that need to pass, HTTP requests, and options about regarding rendering in the interface.
+# Build Your First Configuration
 
-The full TypeScript interface can be [found here on GitHub](https://github.com/interweave-hq/interweave/blob/main/src/interfaces.ts).
+<Callout>This is outdated. Updates in progress.</Callout>
+
+Every Interweave interface revolves around the configuration object. It's pretty much a way to describe the different fields and rules for your interface. You can specify validations that need to pass, HTTP requests, and options about regarding rendering in the interface.
+
+All TypeScript interfaces can be [found here on GitHub](https://github.com/interweave-hq/interweave/blob/main/src/interfaces.ts).
 
 ## Approach
 
-Each project is going to include many schema configurations. Full complete coverage, you should create at least one per table in your database. In practice, you only have to configure a schema if you need to generate a quick CRUD (Create, Read, Update, Delete) form for it.
+Each project is going to include many configurations. Full complete coverage, you should create at least one per table in your database. In practice, you only have to configure a schema if you need to generate a quick CRUD (Create, Read, Update, Delete) form for it.
 
-## Schema Object
+## Interface Configuration
 
 Let's say we're going to be creating schema configurations a blog API we just made. A blog contains many different fields; authors, posts, categories, comments, etc. For this example, **let's start with the author**.
 
-The root schema object has two properties you can configure, `keys` and `requests`:
+The root schema object has two properties you can configure, `fields` and `requests`:
 
 ```js
 const authorConfig = {
-  keys: {},
+  fields: {},
   requests: {}
 };
 ```
 
-### Keys
+### Fields
 
-The `keys` property will contain the outline of our data. You can use any string for the properties of `keys`.
+The `fields` property will contain the outline of our data. You can use any string for the properties of `fields`.
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string"
@@ -42,7 +46,7 @@ You can see we define a field `firstName` for our author object. We also specify
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",
@@ -64,7 +68,7 @@ We also get to specify some requirements for this field using the `validation` p
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",
@@ -93,7 +97,7 @@ We also get access to special validation properties like `is_email`. This will e
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",
@@ -130,7 +134,7 @@ Enums are a great way to ensure your field only contains a certain value:
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",
@@ -174,7 +178,7 @@ Also, let's not forget the ID field. We probably want the server to create this 
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",
@@ -228,7 +232,7 @@ I think that's a perfect configuration to get started. If we push this to our st
 
 ```js
 const authorConfig = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",

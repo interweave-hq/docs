@@ -2,7 +2,7 @@ import { Tabs, Tab } from "nextra-theme-docs";
 
 # Do It Yourself
 
-Interweave doesn't require the JavaScript or the npm package to function. You can make a regular HTTP request to the Interweave API to build your interface with JSON.
+Interweave doesn't require JavaScript or the npm package to function. You can make a regular HTTP request to the Interweave API to build your interface with JSON.
 
 Here is a basic example script to do that:
 
@@ -14,7 +14,7 @@ Here is a basic example script to do that:
             -H "Authorization: Bearer __YOUR_PROJECT_API_TOKEN__" \
             -d '{
                 "schema_config": SCHEMA,
-                "key": SLUG,
+                "key": KEY,
                 "title": TITLE,
                 "description": DESCRIPTION
             }'
@@ -31,8 +31,8 @@ Here is a basic example script to do that:
                 body: JSON.stringify({
                     // Schema information
                     schema_config: schema,
-                    // Note that key/slug, title, and description are separate here
-                    key: schema.slug,
+                    // Note that key, title, and description are separate here
+                    key: schema.key,
                     title: schema.title,
                     description: schema.description
                 }),

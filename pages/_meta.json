@@ -2,10 +2,12 @@
   "index": "Welcome",
   "getting-started": "Getting Started",
   "pricing": "Pricing",
-  "tutorial": "Tutorial",
-  "-- Specification": {
+  "tutorial": {
+    "hidden": true
+  },
+  "-- API": {
     "type": "separator",
-    "title": "Specification"
+    "title": "API"
   },
   "specification": "Specification",
   "build": "Build",
@@ -14,7 +16,9 @@
     "type": "separator",
     "title": "More"
   },
+  "faq": "FAQ",
   "roadmap": "Roadmap",
+  "support": "Support",
   "accessibility": "Accessibility",
   "privacy": "Privacy Policy",
   "terms": "Terms of Service"

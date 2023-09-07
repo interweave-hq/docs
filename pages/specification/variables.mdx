@@ -1,0 +1,38 @@
+# Variables
+
+Variables are a useful way to access dynamic aspects of your interface.
+
+## Supported Variables
+
+Supported variable objects:
+
+- `row`: The selected row in your table
+- `parameters`: Any [Parameters](/specification/parameters) that you may have configured
+- `form`: Values from the submitted form object via a [`create` Request](/specification/requests#create)
+
+## Using Variables
+
+To use a variable in your interface, specify the object and subproperty within two opening and closing tags like this `<<row.id>>`. These parameters are especially useful in requests.
+
+```js {12,16}
+const config = {
+  key: ...,
+  fields: ...,
+  access: ...,
+  requests: {
+    // Will render a table of data if present
+    get: {
+      uri: "https://example.com/genres",
+      http_method: "GET",
+    },
+    update: {
+        uri: "https://example.com/genres/<<row.id>>",
+        http_method: "PATCH",
+    },
+    delete: {
+        uri: "https://example.com/genres/<<row.id>>",
+        http_method: "DELETE",
+    }
+  }
+};
+```

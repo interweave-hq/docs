@@ -3,8 +3,8 @@ import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
 # Getting Started
 
 <Callout type="info">
-  This page uses JavaScript and npm. JavaScript is not necessary to use
-  Interweave. See the [build page](/build-do-it-yourself) for more information.
+  This page uses JavaScript and npm. JavaScript is not necessary to use Interweave. See the [build
+  page](/build-do-it-yourself) for more information.
 </Callout>
 
 ## Installation
@@ -19,12 +19,15 @@ npm install @interweave/interweave
 
 <Tabs items={["JavaScript", "TypeScript"]}>
     <Tab>
-        ```ts filename="interweave.js"
+        ```ts {4-21} filename="interweave.js"
         import { buildInterface } from "@interweave/interweave";
 
         // Define the content of your interface
-        const configuration = {
-          keys: {
+        const config = {
+          key: "unique-for-this-project",
+          slug: "names",
+          title: "Names",
+          fields: {
             firstName: {
               schema: {
                 type: "string"
@@ -40,7 +43,7 @@ npm install @interweave/interweave
         };
 
         // Send to Interweave
-        buildInterface("unique-key", configuration, projectId);
+        buildInterface(config, { id: INTERWEAVE_PROJECT_ID, token: INTERWEAVE_TOKEN });
 
 ````
     </Tab>
@@ -49,8 +52,11 @@ npm install @interweave/interweave
         import { type Schema, buildInterface } from "@interweave/interweave";
 
         // Define the content of your interface
-        const configuration: Schema = {
-          keys: {
+        const config: Schema = {
+          key: "unique-for-this-project",
+          slug: "names",
+          title: "Names",
+          fields: {
             firstName: {
               schema: {
                 type: "string"
@@ -66,7 +72,7 @@ npm install @interweave/interweave
         };
 
         // Send to Interweave
-        buildInterface("unique-key", configuration, projectId);
+        buildInterface(config, { id: INTERWEAVE_PROJECT_ID, token: INTERWEAVE_TOKEN });
 
 ````
 
@@ -74,7 +80,33 @@ npm install @interweave/interweave
 
 </Tabs>
 
-### Step 3: That's it! View your interface in the app:
+### Step 3: Send To Interweave
+
+```ts {1, 21} filename="interweave.js"
+import { buildInterface } from "@interweave/interweave";
+
+// Define the content of your interface
+const config = {
+  fields: {
+    firstName: {
+      schema: {
+        type: "string"
+      }
+    }
+  },
+  requests: {
+    create: {
+      uri: "https://example.com/names",
+      method: "POST"
+    }
+  }
+};
+
+// Send to Interweave
+buildInterface(config, { id: INTERWEAVE_PROJECT_ID, token: INTERWEAVE_TOKEN });
+```
+
+### Step 4: That's it! View your interface in the app:
 
 ![Interweave interface screenshot](/screenshot.png)
 

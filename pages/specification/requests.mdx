@@ -4,8 +4,9 @@ Requests detail how Interweave should communicate with an API. See the [Request]
 
 ```js {4,6,12,17,22}
 const config = {
-  keys: {},
-  access: {},
+  key: ...,
+  fields: ...,
+  access: ...,
   requests: {
     // Will render a table of data if present
     get: {
@@ -24,7 +25,7 @@ const config = {
       http_method: "PATCH"
     },
     // Will render a delete button
-    update: {
+    delete: {
       uri: "https://example.com/genres/<<row.id>>",
       http_method: "DELETE"
     }

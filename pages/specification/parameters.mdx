@@ -1,0 +1,120 @@
+import { Callout } from "nextra-theme-docs";
+
+# Parameters
+
+Parameters are a way to append user-inputted data into your `uri` before they fetch data. Parameters are optional and can allow flexibility.
+
+<Callout type="warning">Parameters only work for the `get` request.</Callout>
+
+```js {8,11-24}
+const config = {
+  key: ...,
+  fields: ...,
+  access: ...,
+  requests: {
+    // Will render a table of data if present
+    get: {
+      uri: "https://example.com/genres/<<parameters.name>>/movies",
+      http_method: "GET",
+      parameters: {
+        "name": {
+            schema: {
+                type: "string",
+                enum: ["Action", "Thriller", "Comedy", "Drama"],
+                default_value: "Comedy"
+            },
+            interface: {
+                form: {
+                    label: "Genre Name"
+                }
+            }
+        }
+      }
+    }
+  }
+};
+```
+
+## Required Parameters
+
+If a parameter is included within the `uri` of the request, then that parameter is considered required. You can access the value in your `uri` by using `<<parameters.your-parameter-name>>`.
+
+## Optional Parameters
+
+We may also want to specify optional query parameters. Something that gets appended to the end of the URL like this: `https://example.com/genres?page=1`. To achieve this, you don't have to specify special parameters in the `uri`. Instead, add your property name under `parameters`, and Interweave will know to append it as a query parameter.
+
+```js {8,11-23}
+const config = {
+  key: ...,
+  fields: ...,
+  access: ...,
+  requests: {
+    // Will render a table of data if present
+    get: {
+      uri: "https://example.com/genres",
+      http_method: "GET",
+      parameters: {
+        "page": {
+            schema: {
+                type: "number",
+                default_value: 1
+            },
+            interface: {
+                form: {
+                    label: "Page Number"
+                }
+            }
+        }
+      }
+    }
+  }
+};
+```
+
+## Dynamic Parameters
+
+Sometimes we may want to use other data from our API to generate a parameter. Let's say we want a dropdown to choose from all of the database genres we have stored in our API, and we want to fetch the movies for that genre. We may add genres at any moment, so we don't want this to be a static array. Instead, we can use a [Dynamic Enum](/specification/dynamic-enums) to fetch our data and generate the dropdown menu at runtime.
+
+```js {14-20}
+const config = {
+  key: ...,
+  fields: ...,
+  access: ...,
+  requests: {
+    // Will render a table of data if present
+    get: {
+      uri: "https://example.com/genres/<<parameters.genreId>>/movies",
+      http_method: "GET",
+      parameters: {
+        "genreId": {
+            schema: {
+                type: "string",
+                dynamic_enum: {
+                    uri: "https://example.com/genres",
+                    http_method: "GET",
+                    data_path: "path.to.array",
+                    label_path: "title",
+                    value_path: "id"
+                }
+            },
+            interface: {
+                form: {
+                    label: "Genre"
+                }
+            }
+        }
+      }
+    }
+  }
+};
+```
+
+The above configuration will create a dropdown of movie genres. Once that dropdown loads, value of the dropdown will automatically populate the `<<parameters.genreId>>` piece within the `uri`.
+
+## Accessing Parameter Values
+
+In most other places within your Interweave interface, you can access the value of a parameter by using [Variables](/specification/variables). So considering the above example, you can later access that value by using `<<parameters.page>>`.
+
+## Full API
+
+You can see all of the supported fields in our repository in the TypeScript interface named `Parameter`. [Here is a direct link.](https://github.com/interweave-hq/interweave/blob/main/src/interfaces.ts)

@@ -1,0 +1,53 @@
+import { Callout } from "nextra-theme-docs";
+
+# Dynamic Enums
+
+Dynamic Enums are a great way to use dynamic data within Interweave. You can think of an enum as an array of data. The `dynamic_enum` property uses the shape of a [Request](/types/request).
+
+```js
+// Example enum data structures
+['Action', 'Comedy', 'Thriller']
+[
+    { label: 'Action 💥', value: 'action'},
+    { label: 'Comedy 😂', value: 'comedy'},
+    { label: 'Thriller 👺', value: 'thriller'},
+]
+[1, 2, 3]
+```
+
+Here is an example of implementing a dynamic enum for a field:
+
+```js {14-20}
+const config = {
+  key: ...,
+  fields: {
+    title: {
+        schema: {
+            type: "string"
+        }
+    },
+    genres: {
+        schema: {
+            type: "string",
+            // `is_array` true will render a multiselect vs. dropdown
+            is_array: true,
+            dynamic_enum: {
+                uri: "https://example.com/genres",
+                http_method: "GET",
+                data_path: "path.to.array",
+                label_path: "title",
+                value_path: "id",
+            }
+        }
+    }
+  },
+  access: ...,
+  requests: ...
+};
+```
+
+<Callout type="info">For more options to customize your dynamic enums, see the [Request](/types/request) type.</Callout>
+
+## Rendering a MultiSelect Element vs. Dropdown Element
+
+The schema property `is_array` will determine whether a multiselect or dropdown is rendered. A dropdown will render if `is_array` is `false`. A multiselect will render if `is_array` is `true`. `is_array` means the field expects an array of values, and that array of values will be the form-submission value for that field.

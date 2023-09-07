@@ -23,7 +23,7 @@ Only applies to `type: number`. The minimum value.
 
 ```js
 const config = {
-  keys: {
+  fields: {
     age: {
       schema: {
         type: "number"
@@ -46,7 +46,7 @@ Only applies to `type: number`. The maximum value.
 
 ```js
 const config = {
-  keys: {
+  fields: {
     age: {
       schema: {
         type: "number"
@@ -69,7 +69,7 @@ The submitted value must be equal to this value.
 
 ```js
 const config = {
-  keys: {
+  fields: {
     age: {
       schema: {
         type: "number"
@@ -90,7 +90,7 @@ const config = {
 
 ```js
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string"
@@ -113,7 +113,7 @@ Only applies when the field is a `string` or `is_array` is true. Ensures the len
 
 ```js
 const config = {
-  keys: {
+  fields: {
     entries: {
       schema: {
         type: "number",
@@ -137,7 +137,7 @@ Only applies when the field is a `string` or `is_array` is true. Ensures the len
 
 ```js
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string"
@@ -160,7 +160,7 @@ Only applies when the field is a `string` or `is_array` is true. Ensures the len
 
 ```js
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string"
@@ -183,7 +183,7 @@ Whether this field should only accept valid emails or not. Accepts a `boolean` o
 
 ```js
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string"
@@ -200,7 +200,7 @@ or alternatively for more fine-grained control:
 
 ```js
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string"
@@ -226,7 +226,7 @@ Whether this field should only accept valid phone numbers or not. Accepts a `boo
 
 ```js
 const config = {
-  keys: {
+  fields: {
     phone: {
       schema: {
         type: "string"
@@ -245,7 +245,7 @@ Specify a field that must fulfill a condition if the other is present. Each acce
 
 ```js
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",
@@ -269,7 +269,7 @@ If you use interface.form.out_key to set a different output path, then make sure
 
 ```js {10, 20}
 const config = {
-  keys: {
+  fields: {
     firstName: {
       schema: {
         type: "string",

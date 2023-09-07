@@ -1,7 +1,13 @@
 {
-  "keys": "",
+  "fields": "",
   "access": "Access",
   "authentication": "Authentication",
   "requests": "Requests",
-  "billing-strategy": "Billing Strategy"
+  "billing-strategy": "Billing Strategy",
+  "--": {
+    "type": "separator"
+  },
+  "parameters": "URL Parameters",
+  "variables": "Using Variables",
+  "dynamic-enums": "Dynamic Data"
 }
