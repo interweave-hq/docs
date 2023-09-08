@@ -1,4 +1,6 @@
 import { Logo } from "./components/Logo";
+import { useRouter } from "next/router";
+import { useConfig } from "nextra-theme-docs";
 
 export default {
   logo: <Logo />,
@@ -10,6 +12,26 @@ export default {
     return {
       titleTemplate: "%s – Interweave"
     };
+  },
+  head: () => {
+    const { asPath, defaultLocale, locale } = useRouter();
+    const { frontMatter } = useConfig();
+    const url = "https://docs.interwv.com" + (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
+
+    return (
+      <>
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={frontMatter.title || "Interweave"} />
+        <meta property="og:image" content="/interweave-meta.jpg" />
+        <meta
+          property="og:description"
+          content={
+            frontMatter.description ||
+            "User-interfaces for your API. Live in seconds, functional immediately, and keeps your team moving fast."
+          }
+        />
+      </>
+    );
   },
   sidebar: {
     defaultMenuCollapseLevel: Infinity
