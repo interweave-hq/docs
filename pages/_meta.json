@@ -2,9 +2,7 @@
   "index": "Welcome",
   "getting-started": "Getting Started",
   "pricing": "Pricing",
-  "tutorial": {
-    "hidden": true
-  },
+  "tutorial": "Tutorial",
   "-- API": {
     "type": "separator",
     "title": "API"
