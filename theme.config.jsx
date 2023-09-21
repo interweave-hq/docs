@@ -7,7 +7,7 @@ export default {
   project: {
     link: "https://github.com/interweave-hq/interweave"
   },
-  docsRepositoryBase: "https://github.com/interweave-hq/interweave/blob/docs",
+  docsRepositoryBase: "https://github.com/interweave-hq/interweave/blob/main",
   useNextSeoProps() {
     return {
       titleTemplate: "%s – Interweave"
@@ -47,7 +47,7 @@ export default {
     text: (
       <span>
         {new Date().getFullYear()} ©{" "}
-        <a href="https://nextra.site" target="_blank">
+        <a href="https://carbonology.in" target="_blank">
           Carbonology Interactive LLC
         </a>
       </span>
