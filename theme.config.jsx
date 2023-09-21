@@ -7,7 +7,7 @@ export default {
   project: {
     link: "https://github.com/interweave-hq/interweave"
   },
-  docsRepositoryBase: "https://github.com/interweave-hq/interweave/blob/main",
+  docsRepositoryBase: "https://github.com/interweave-hq/docs/blob/main",
   useNextSeoProps() {
     return {
       titleTemplate: "%s – Interweave"
