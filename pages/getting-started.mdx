@@ -10,12 +10,23 @@ import { Steps, Tabs, Tab, Callout } from "nextra-theme-docs";
 ## Installation
 
 <Steps>
-### Step 1: Install
+### Step 1: Create A Project
+
+From the Interweave dashboard, click the "Create Project" button. A project will have a collection of different interfaces. Usually one project per API is best.
+
+You'll need the project ID to send your interfaces to. It'll look like this: `e1ec5d64-2690-4a5c-93e6-a327744406ac`.
+
+While here, generate an API token too. You'll need it later.
+
+### Step 2: Install Helper Package
+
 ```bash
 npm install @interweave/interweave
 ```
 
-### Step 2: Build Config
+### Step 3: Write Configuration
+
+Outline your interface details and specify what your data model looks like. These fields will render on the table.
 
 <Tabs items={["JavaScript", "TypeScript"]}>
     <Tab>
@@ -24,8 +35,7 @@ npm install @interweave/interweave
 
         // Define the content of your interface
         const config = {
-          key: "unique-for-this-project",
-          slug: "names",
+          key: "names-interface",
           title: "Names",
           fields: {
             firstName: {
@@ -80,7 +90,9 @@ npm install @interweave/interweave
 
 </Tabs>
 
-### Step 3: Send To Interweave
+### Step 4: Send To Interweave
+
+Use the Project ID and API token to send the interfaces to Interweave.
 
 ```ts {1, 21} filename="interweave.js"
 import { buildInterface } from "@interweave/interweave";
@@ -106,8 +118,8 @@ const config = {
 buildInterface(config, { id: INTERWEAVE_PROJECT_ID, token: INTERWEAVE_TOKEN });
 ```
 
-### Step 4: That's it! View your interface in the app:
+### Step 5: That's it! View your interface in the app:
 
-![Interweave interface screenshot](/screenshot.png)
+![Interweave interface screenshot](/interface-oct-2023.jpg)
 
 </Steps>
