@@ -54,7 +54,7 @@ export default {
     )
   },
   chat: {
-    link: "https://discord.gg/ypfzHSJ9jU",
+    link: "https://interwv.com/chat",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width={27} height={27}>
         <path
